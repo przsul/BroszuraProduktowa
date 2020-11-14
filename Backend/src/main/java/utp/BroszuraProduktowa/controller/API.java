@@ -12,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,16 +39,6 @@ public class API {
     
     @Autowired
     private JWTUtil jwtTokenUtil;
-
-    @GetMapping("/user")
-    public String userAPI() {
-        return ("<h1>User API</h1>");
-    }
-
-    @GetMapping("/admin")
-    public String adminAPI() {
-        return ("<h1>Admin API</h1>");
-    }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserDTO user) {
