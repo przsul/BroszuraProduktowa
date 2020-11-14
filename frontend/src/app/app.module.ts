@@ -8,17 +8,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { UserPageComponent } from './user-page/user-page.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';;
+
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterPageComponent,
     LoginPageComponent,
-    HomePageComponent,
-    UserPageComponent,
-    AdminPageComponent
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

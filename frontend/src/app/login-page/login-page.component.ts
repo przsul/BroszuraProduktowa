@@ -35,11 +35,8 @@ export class LoginPageComponent implements OnInit {
 
       localStorage.setItem("jwt", response["jwt"]);
 
-      if(localStorage.getItem("jwt")) {
-        this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
-          this.router.navigateByUrl('/home');
-        }); 
-      }
+      if(localStorage.getItem("jwt"))
+        this.router.navigate(["home"]);
 
     }, (error) => {
       console.error(error);

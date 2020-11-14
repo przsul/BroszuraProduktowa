@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { DataService } from '../data.service';
-import { StorageService } from '../storage.service';
+import { Component, OnInit, SecurityContext } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home-page',
@@ -10,22 +8,21 @@ import { StorageService } from '../storage.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private storageService: StorageService, private dataService: DataService, private router: Router) {}
+  brochure: string;
+  asd: any;
+
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-    this.dataService.validateToken(localStorage.getItem('jwt')).subscribe((response: any) => {
-
-      console.log(JSON.stringify(response, null, 2));
-
-      if (this.storageService.getRoles() == "ROLE_USER")      
-        this.router.navigateByUrl('user', { skipLocationChange: true });
-      else if (this.storageService.getRoles() == "ROLE_ADMIN")
-        this.router.navigateByUrl('admin', { skipLocationChange: true });
-
-    }, () => {
-      localStorage.removeItem('jwt');
-      this.router.navigate(['']);
-    });
+    this.brochure = `
+      <style>
+        .red {
+          border: 3px dotted red;
+        }
+      </style>
+      <span class="red"><strong>asd</strong></span>
+    `;
+    this.asd = this.sanitizer.bypassSecurityTrustHtml(this.brochure);
   }
 
 }
