@@ -20,6 +20,9 @@ public class ProductService {
         productDao.setTags(productDto.getTags());
 
         productRepository.save(productDao);
+    }
+
+	public void deleteProduct(int id) {
+        productRepository.deleteById(id);
 	}
-    
 }
