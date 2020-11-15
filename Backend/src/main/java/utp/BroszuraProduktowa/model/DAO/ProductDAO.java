@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 
 import lombok.Data;
 
-@Entity(name = "products")
+@Entity(name = "product")
 @Data
 public class ProductDAO {
     
@@ -22,6 +22,11 @@ public class ProductDAO {
     private String description;
     private String tags;
 
-    @OneToMany
-    private List<CommentRatingsDAO> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "product")
+    private List<CommentRatingDAO> comments = new ArrayList<>();
+
+    public void add(CommentRatingDAO commentRatingDao) {
+        comments.add(commentRatingDao);
+        commentRatingDao.setProduct(this);
+    }
 }

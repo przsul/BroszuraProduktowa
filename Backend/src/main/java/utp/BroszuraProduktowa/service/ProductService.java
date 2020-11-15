@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import utp.BroszuraProduktowa.model.DAO.CommentRatingsDAO;
+import utp.BroszuraProduktowa.model.DAO.CommentRatingDAO;
 import utp.BroszuraProduktowa.model.DAO.ProductDAO;
-import utp.BroszuraProduktowa.model.DTO.CommentDTO;
+import utp.BroszuraProduktowa.model.DTO.CommentRatingDTO;
 import utp.BroszuraProduktowa.model.DTO.ProductDTO;
 import utp.BroszuraProduktowa.repository.CommentRepository;
 import utp.BroszuraProduktowa.repository.ProductRepository;
@@ -34,14 +34,17 @@ public class ProductService {
         productRepository.deleteById(id);
 	}
 
-	public void addComment(CommentDTO commentDto, int productId) {
-        CommentRatingsDAO commentDao = new CommentRatingsDAO();
-        commentDao.setComment(commentDto.getComment());
-        commentDao.setRating(commentDto.getRating());
-        commentRepository.save(commentDao);
+	public void addComment(CommentRatingDTO commentRatingDto, int productId) {
         Optional<ProductDAO> productDao = productRepository.findById(productId);
+        
         if (productDao.isPresent()) {
-            productDao.get().getComments().add(commentDao);
+            CommentRatingDAO commentRatingDao = new CommentRatingDAO();
+            commentRatingDao.setComment(commentRatingDto.getComment());
+            commentRatingDao.setRating(commentRatingDto.getRating());
+
+            productDao.get().add(commentRatingDao);
+
+            commentRepository.save(commentRatingDao);
             productRepository.save(productDao.get());
         }
 	}

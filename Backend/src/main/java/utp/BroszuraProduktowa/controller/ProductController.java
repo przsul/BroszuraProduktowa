@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import utp.BroszuraProduktowa.model.DTO.CommentDTO;
+import utp.BroszuraProduktowa.model.DTO.CommentRatingDTO;
 import utp.BroszuraProduktowa.model.DTO.ProductDTO;
 import utp.BroszuraProduktowa.service.ProductService;
 
@@ -32,7 +32,7 @@ public class ProductController {
     }
 
     @PostMapping("addComment/{productId}")
-    public void addComment(@RequestBody CommentDTO commentDto, @PathVariable int productId) {
-        productService.addComment(commentDto, productId);
+    public void addComment(@RequestBody CommentRatingDTO commentRatingDto, @PathVariable int productId) {
+        productService.addComment(commentRatingDto, productId);
     }
 }
