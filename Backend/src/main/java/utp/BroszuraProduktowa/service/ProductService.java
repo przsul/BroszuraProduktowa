@@ -46,20 +46,15 @@ public class ProductService {
         
 
         if (productDao.isPresent()) {
-            Optional<UserDAO> userDao = userRepository.findByUserName(principal.getName());
-            
-            if (userDao.isPresent()) {
-                CommentRatingDAO commentRatingDao = new CommentRatingDAO();
-                commentRatingDao.setComment(commentRatingDto.getComment());
-                commentRatingDao.setRating(commentRatingDto.getRating());
-    
-                productDao.get().add(commentRatingDao);
-                userDao.get().add(commentRatingDao);
+            CommentRatingDAO commentRatingDao = new CommentRatingDAO();
+            commentRatingDao.setComment(commentRatingDto.getComment());
+            commentRatingDao.setRating(commentRatingDto.getRating());
+            commentRatingDao.setUsername(principal.getName());
 
-                userRepository.save(userDao.get());
-                commentRepository.save(commentRatingDao);
-                productRepository.save(productDao.get());    
-            }
+            productDao.get().add(commentRatingDao);
+
+            commentRepository.save(commentRatingDao);
+            productRepository.save(productDao.get());    
         }
 	}
 
@@ -78,5 +73,9 @@ public class ProductService {
 
 	public List<ProductDAO> getProducts() {
 		return productRepository.findAll();
+	}
+
+	public List<CommentRatingDAO> getCommentsRatings(int productId) {
+		return productRepository.findById(productId).get().getComments();
 	}
 }

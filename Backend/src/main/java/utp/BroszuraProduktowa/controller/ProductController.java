@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import utp.BroszuraProduktowa.model.DAO.CommentRatingDAO;
 import utp.BroszuraProduktowa.model.DAO.ProductDAO;
 import utp.BroszuraProduktowa.model.DTO.CommentRatingDTO;
 import utp.BroszuraProduktowa.model.DTO.ProductDTO;
@@ -39,6 +40,11 @@ public class ProductController {
     @GetMapping("getProducts")
     public List<ProductDAO> getProducts() {
         return productService.getProducts();
+    }
+
+    @GetMapping("getCommentsRatings/{productId}")
+    public List<CommentRatingDAO> getCommentsRatings(@PathVariable int productId) {
+        return productService.getCommentsRatings(productId);
     }
 
     @PostMapping("addCommentRating/{productId}")

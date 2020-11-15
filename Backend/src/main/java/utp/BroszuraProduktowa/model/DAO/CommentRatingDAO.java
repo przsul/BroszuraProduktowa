@@ -6,8 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
-import utp.BroszuraProduktowa.model.UserDAO;
 
 @Entity(name = "comment_rating")
 @Data
@@ -18,10 +19,9 @@ public class CommentRatingDAO {
     private int id;
     private String comment;
     private int rating;
+    private String username;
 
+    @JsonBackReference
     @ManyToOne
     private ProductDAO product;
-
-    @ManyToOne
-    private UserDAO userDao;
 }
