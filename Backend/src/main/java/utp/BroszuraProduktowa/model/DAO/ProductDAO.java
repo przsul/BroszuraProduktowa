@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 import utp.BroszuraProduktowa.model.UserDAO;
 
@@ -25,6 +27,7 @@ public class ProductDAO {
     private String description;
     private String tags;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<CommentRatingDAO> comments = new ArrayList<>();
     public void add(CommentRatingDAO commentRatingDao) {
@@ -32,6 +35,7 @@ public class ProductDAO {
         commentRatingDao.setProduct(this);
     }
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "products")
     private List<UserDAO> users = new ArrayList<>();
     public void add(UserDAO userDao) {

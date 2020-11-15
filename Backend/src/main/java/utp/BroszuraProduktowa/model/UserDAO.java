@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -28,6 +29,7 @@ public class UserDAO {
     private String roles;
 
     @ManyToMany
+    @JoinTable(name = "favorite")
     private List<ProductDAO> products = new ArrayList<>();
     public void add(ProductDAO productDao) {
         products.add(productDao);
