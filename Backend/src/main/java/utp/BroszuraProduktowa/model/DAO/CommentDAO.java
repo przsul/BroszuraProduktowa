@@ -1,4 +1,4 @@
-package utp.BroszuraProduktowa.model;
+package utp.BroszuraProduktowa.model.DAO;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,16 +7,12 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
-@Entity
+@Entity(name = "comments")
 @Data
-public class UserDAO {
-    
+public class CommentDAO {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String userName;
-    private String email;
-    private String password;
-    private boolean active;
-    private String roles;
+    private String comment;
 }

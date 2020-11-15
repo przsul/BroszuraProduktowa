@@ -1,4 +1,4 @@
-package utp.BroszuraProduktowa.model;
+package utp.BroszuraProduktowa.model.DTO;
 
 import lombok.Data;
 

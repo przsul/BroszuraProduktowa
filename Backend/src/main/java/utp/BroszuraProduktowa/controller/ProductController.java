@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import utp.BroszuraProduktowa.model.ProductDTO;
+import utp.BroszuraProduktowa.model.DTO.CommentDTO;
+import utp.BroszuraProduktowa.model.DTO.ProductDTO;
 import utp.BroszuraProduktowa.service.ProductService;
 
 @CrossOrigin("*")
@@ -28,5 +29,10 @@ public class ProductController {
     @GetMapping("deleteProduct/{id}")
     public void deleteProduct(@PathVariable int id) {
         productService.deleteProduct(id);
+    }
+
+    @PostMapping("addComment/{productId}")
+    public void addComment(@RequestBody CommentDTO commentDto, @PathVariable int productId) {
+        productService.addComment(commentDto, productId);
     }
 }

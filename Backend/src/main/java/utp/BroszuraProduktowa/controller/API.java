@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import utp.BroszuraProduktowa.model.AuthenticationRequest;
 import utp.BroszuraProduktowa.model.AuthenticationResponse;
-import utp.BroszuraProduktowa.model.UserDTO;
+import utp.BroszuraProduktowa.model.DTO.UserDTO;
 import utp.BroszuraProduktowa.service.UserService;
 import utp.BroszuraProduktowa.util.JWTUtil;
 
