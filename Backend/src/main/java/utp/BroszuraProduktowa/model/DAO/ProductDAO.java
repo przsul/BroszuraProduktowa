@@ -23,5 +23,5 @@ public class ProductDAO {
     private String tags;
 
     @OneToMany
-    private List<CommentDAO> comments = new ArrayList<>();
+    private List<CommentRatingsDAO> comments = new ArrayList<>();
 }

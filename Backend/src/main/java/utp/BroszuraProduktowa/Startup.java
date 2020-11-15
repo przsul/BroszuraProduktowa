@@ -7,7 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import utp.BroszuraProduktowa.model.DAO.UserDAO;
+import utp.BroszuraProduktowa.model.UserDAO;
 import utp.BroszuraProduktowa.repository.UserRepository;
 
 @Component

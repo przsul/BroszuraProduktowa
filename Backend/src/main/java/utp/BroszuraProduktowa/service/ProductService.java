@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import utp.BroszuraProduktowa.model.DAO.CommentDAO;
+import utp.BroszuraProduktowa.model.DAO.CommentRatingsDAO;
 import utp.BroszuraProduktowa.model.DAO.ProductDAO;
 import utp.BroszuraProduktowa.model.DTO.CommentDTO;
 import utp.BroszuraProduktowa.model.DTO.ProductDTO;
@@ -35,8 +35,9 @@ public class ProductService {
 	}
 
 	public void addComment(CommentDTO commentDto, int productId) {
-        CommentDAO commentDao = new CommentDAO();
+        CommentRatingsDAO commentDao = new CommentRatingsDAO();
         commentDao.setComment(commentDto.getComment());
+        commentDao.setRating(commentDto.getRating());
         commentRepository.save(commentDao);
         Optional<ProductDAO> productDao = productRepository.findById(productId);
         if (productDao.isPresent()) {

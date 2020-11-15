@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import utp.BroszuraProduktowa.model.MyUserDetails;
-import utp.BroszuraProduktowa.model.DAO.UserDAO;
+import utp.BroszuraProduktowa.model.UserDAO;
 import utp.BroszuraProduktowa.repository.UserRepository;
 
 @Service

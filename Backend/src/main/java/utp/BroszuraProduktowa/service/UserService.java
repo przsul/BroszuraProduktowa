@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import utp.BroszuraProduktowa.model.DAO.UserDAO;
+import utp.BroszuraProduktowa.model.UserDAO;
 import utp.BroszuraProduktowa.model.DTO.UserDTO;
 import utp.BroszuraProduktowa.repository.UserRepository;
 
