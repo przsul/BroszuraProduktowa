@@ -3,6 +3,7 @@ package utp.BroszuraProduktowa.model.DAO;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class ProductDAO {
     private String description;
     private String tags;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<CommentRatingDAO> comments = new ArrayList<>();
 
     public void add(CommentRatingDAO commentRatingDao) {
