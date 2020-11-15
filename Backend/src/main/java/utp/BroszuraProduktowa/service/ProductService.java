@@ -40,18 +40,25 @@ public class ProductService {
         productRepository.deleteById(id);
 	}
 
-	public void addComment(CommentRatingDTO commentRatingDto, int productId) {
+	public void addCommentRating(CommentRatingDTO commentRatingDto, int productId, Principal principal) {
         Optional<ProductDAO> productDao = productRepository.findById(productId);
         
+
         if (productDao.isPresent()) {
-            CommentRatingDAO commentRatingDao = new CommentRatingDAO();
-            commentRatingDao.setComment(commentRatingDto.getComment());
-            commentRatingDao.setRating(commentRatingDto.getRating());
+            Optional<UserDAO> userDao = userRepository.findByUserName(principal.getName());
+            
+            if (userDao.isPresent()) {
+                CommentRatingDAO commentRatingDao = new CommentRatingDAO();
+                commentRatingDao.setComment(commentRatingDto.getComment());
+                commentRatingDao.setRating(commentRatingDto.getRating());
+    
+                productDao.get().add(commentRatingDao);
+                userDao.get().add(commentRatingDao);
 
-            productDao.get().add(commentRatingDao);
-
-            commentRepository.save(commentRatingDao);
-            productRepository.save(productDao.get());
+                userRepository.save(userDao.get());
+                commentRepository.save(commentRatingDao);
+                productRepository.save(productDao.get());    
+            }
         }
 	}
 

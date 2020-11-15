@@ -27,15 +27,13 @@ public class ProductDAO {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<CommentRatingDAO> comments = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "products")
-    private List<UserDAO> users = new ArrayList<>();
-    
     public void add(CommentRatingDAO commentRatingDao) {
         comments.add(commentRatingDao);
         commentRatingDao.setProduct(this);
     }
 
+    @ManyToMany(mappedBy = "products")
+    private List<UserDAO> users = new ArrayList<>();
     public void add(UserDAO userDao) {
         users.add(userDao);
     }

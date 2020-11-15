@@ -34,8 +34,8 @@ public class ProductController {
     }
 
     @PostMapping("addComment/{productId}")
-    public void addComment(@RequestBody CommentRatingDTO commentRatingDto, @PathVariable int productId) {
-        productService.addComment(commentRatingDto, productId);
+    public void addCommentRating(@RequestBody CommentRatingDTO commentRatingDto, @PathVariable int productId, Principal principal) {
+        productService.addCommentRating(commentRatingDto, productId, principal);
     }
 
     @PostMapping("addToFavorite/{productId}")

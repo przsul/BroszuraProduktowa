@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
+import utp.BroszuraProduktowa.model.UserDAO;
 
 @Entity(name = "comment_rating")
 @Data
@@ -20,4 +21,7 @@ public class CommentRatingDAO {
 
     @ManyToOne
     private ProductDAO product;
+
+    @ManyToOne
+    private UserDAO userDao;
 }
