@@ -1,5 +1,7 @@
 package utp.BroszuraProduktowa.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,5 +36,10 @@ public class ProductController {
     @PostMapping("addComment/{productId}")
     public void addComment(@RequestBody CommentRatingDTO commentRatingDto, @PathVariable int productId) {
         productService.addComment(commentRatingDto, productId);
+    }
+
+    @PostMapping("addToFavorite/{productId}")
+    public void addToFavorite(@PathVariable int productId, Principal principal) {
+        productService.addToFavorite(productId, principal);
     }
 }

@@ -8,9 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import utp.BroszuraProduktowa.model.UserDAO;
 
 @Entity(name = "product")
 @Data
@@ -26,8 +28,15 @@ public class ProductDAO {
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<CommentRatingDAO> comments = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "products")
+    private List<UserDAO> users = new ArrayList<>();
+    
     public void add(CommentRatingDAO commentRatingDao) {
         comments.add(commentRatingDao);
         commentRatingDao.setProduct(this);
+    }
+
+    public void add(UserDAO userDao) {
+        users.add(userDao);
     }
 }

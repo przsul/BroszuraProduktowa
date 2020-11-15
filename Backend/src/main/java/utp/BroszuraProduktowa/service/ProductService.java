@@ -1,16 +1,19 @@
 package utp.BroszuraProduktowa.service;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import utp.BroszuraProduktowa.model.UserDAO;
 import utp.BroszuraProduktowa.model.DAO.CommentRatingDAO;
 import utp.BroszuraProduktowa.model.DAO.ProductDAO;
 import utp.BroszuraProduktowa.model.DTO.CommentRatingDTO;
 import utp.BroszuraProduktowa.model.DTO.ProductDTO;
 import utp.BroszuraProduktowa.repository.CommentRepository;
 import utp.BroszuraProduktowa.repository.ProductRepository;
+import utp.BroszuraProduktowa.repository.UserRepository;
 
 @Service
 public class ProductService {
@@ -20,6 +23,9 @@ public class ProductService {
 
     @Autowired
     CommentRepository commentRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
 	public void addProduct(ProductDTO productDto) {
         ProductDAO productDao = new ProductDAO();
@@ -46,6 +52,19 @@ public class ProductService {
 
             commentRepository.save(commentRatingDao);
             productRepository.save(productDao.get());
+        }
+	}
+
+	public void addToFavorite(int productId, Principal principal) {
+        Optional<UserDAO> userDao = userRepository.findByUserName(principal.getName());
+
+        if (userDao.isPresent()) {
+            Optional<ProductDAO> productDao = productRepository.findById(productId);
+            if (productDao.isPresent()) {
+                userDao.get().add(productDao.get());
+                userRepository.save(userDao.get());
+                productRepository.save(productDao.get());
+            }
         }
 	}
 }
