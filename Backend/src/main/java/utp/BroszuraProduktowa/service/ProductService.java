@@ -57,7 +57,7 @@ public class ProductService {
             commentRatingDao.setRating(commentRatingDto.getRating());
             commentRatingDao.setUsername(principal.getName());
 
-            productDao.get().add(commentRatingDao);
+            productDao.get().addCommentRating(commentRatingDao);
 
             commentRepository.save(commentRatingDao);
             productRepository.save(productDao.get());    
@@ -68,7 +68,7 @@ public class ProductService {
         Optional<ProductDAO> productDao = productRepository.findById(productId);
 
         if (productDao.isPresent()) {
-            Optional<UserDAO> userDao = userRepository.findByUserName(principal.getName());
+            Optional<UserDAO> userDao = userRepository.findByUsername(principal.getName());
 
             if (userDao.isPresent()) {
                 userDao.get().addProduct(productDao.get());
@@ -91,7 +91,7 @@ public class ProductService {
         Optional<ProductDAO> productDao = productRepository.findById(productId);
 
         if (productDao.isPresent()) {
-            Optional<UserDAO> userDao = userRepository.findByUserName(principal.getName());
+            Optional<UserDAO> userDao = userRepository.findByUsername(principal.getName());
 
             if (userDao.isPresent()) {
                 userDao.get().delete(productDao.get());

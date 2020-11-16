@@ -9,6 +9,6 @@ import utp.BroszuraProduktowa.model.UserDAO;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserDAO, Integer> {
-    Optional<UserDAO> findByUserName(String userName);
-    Optional<UserDAO> findByUserNameOrEmail(String userName, String email);
+    Optional<UserDAO> findByUsername(String userName);
+    Optional<UserDAO> findByUsernameOrEmail(String userName, String email);
 }

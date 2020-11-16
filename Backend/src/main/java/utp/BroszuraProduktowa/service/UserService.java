@@ -23,11 +23,11 @@ public class UserService {
 
     public ResponseEntity<?> register(UserDTO user, String role) {
 
-        Optional<UserDAO> u = userRepository.findByUserNameOrEmail(user.getUsername(), user.getEmail());
+        Optional<UserDAO> u = userRepository.findByUsernameOrEmail(user.getUsername(), user.getEmail());
 
         if (!u.isPresent()) {
             UserDAO userDAO = new UserDAO();
-            userDAO.setUserName(user.getUsername());
+            userDAO.setUsername(user.getUsername());
             userDAO.setPassword(passwordEncoder.encode(user.getPassword()));
             userDAO.setEmail(user.getEmail());
             userDAO.setActive(true);
