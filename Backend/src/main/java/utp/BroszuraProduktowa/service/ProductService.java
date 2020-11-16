@@ -28,13 +28,13 @@ public class ProductService {
     @Autowired
     UserRepository userRepository;
 
-	public void addProduct(ProductDTO productDto) {
+	public ProductDAO addProduct(ProductDTO productDto) {
         ProductDAO productDao = new ProductDAO();
         productDao.setName(productDto.getName());
         productDao.setDescription(productDto.getDescription());
         productDao.setTags(productDto.getTags());
 
-        productRepository.save(productDao);
+        return productRepository.save(productDao);
     }
 
 	public void deleteProduct(int id) {
@@ -77,5 +77,19 @@ public class ProductService {
 
 	public List<CommentRatingDAO> getCommentsRatings(int productId) {
 		return productRepository.findById(productId).get().getComments();
+	}
+
+	public void deleteFromFavorite(int productId, Principal principal) {
+        Optional<ProductDAO> productDao = productRepository.findById(productId);
+
+        if (productDao.isPresent()) {
+            Optional<UserDAO> userDao = userRepository.findByUserName(principal.getName());
+
+            if (userDao.isPresent()) {
+                userDao.get().delete(productDao.get());
+                userRepository.save(userDao.get());
+                productRepository.save(productDao.get());
+            }
+        }
 	}
 }

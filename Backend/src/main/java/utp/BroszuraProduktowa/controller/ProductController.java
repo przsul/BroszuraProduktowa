@@ -56,4 +56,9 @@ public class ProductController {
     public void addToFavorite(@PathVariable int productId, Principal principal) {
         productService.addToFavorite(productId, principal);
     }
+
+    @DeleteMapping("deleteFromFavorite/{productId}")
+    public void deleteFromFavorite(@PathVariable int productId, Principal principal) {
+        productService.deleteFromFavorite(productId, principal);
+    }
 }

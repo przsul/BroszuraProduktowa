@@ -36,9 +36,13 @@ public class ProductDAO {
     }
 
     @JsonBackReference
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany(mappedBy = "products", cascade = CascadeType.REMOVE)
     private List<UserDAO> users = new ArrayList<>();
     public void add(UserDAO userDao) {
         users.add(userDao);
+    }
+
+    public void delete(UserDAO userDao) {
+        users.remove(userDao);
     }
 }

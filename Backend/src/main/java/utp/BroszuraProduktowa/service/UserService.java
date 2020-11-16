@@ -21,7 +21,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public ResponseEntity<?> register(UserDTO user) {
+    public ResponseEntity<?> register(UserDTO user, String role) {
 
         Optional<UserDAO> u = userRepository.findByUserNameOrEmail(user.getUsername(), user.getEmail());
 
@@ -31,7 +31,7 @@ public class UserService {
             userDAO.setPassword(passwordEncoder.encode(user.getPassword()));
             userDAO.setEmail(user.getEmail());
             userDAO.setActive(true);
-            userDAO.setRoles("ROLE_USER");
+            userDAO.setRoles(role);
     
             userRepository.save(userDAO);    
         } else

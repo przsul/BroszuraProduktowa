@@ -33,4 +33,9 @@ public class UserDAO {
         products.add(productDao);
         productDao.add(this);
     }
+
+    public void delete(ProductDAO productDao) {
+        products.remove(productDao);
+        productDao.delete(this);
+    }
 }

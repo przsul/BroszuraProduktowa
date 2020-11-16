@@ -40,9 +40,9 @@ public class API {
     @Autowired
     private JWTUtil jwtTokenUtil;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserDTO user) {
-        return userService.register(user);
+    @PostMapping("/registerUser")
+    public ResponseEntity<?> registerUser(@RequestBody UserDTO user) {
+        return userService.register(user, "ROLE_USER");
     }
 
     @PostMapping("/validateToken")

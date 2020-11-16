@@ -1,38 +1,47 @@
 package utp.BroszuraProduktowa;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import utp.BroszuraProduktowa.model.UserDAO;
-import utp.BroszuraProduktowa.repository.UserRepository;
+import utp.BroszuraProduktowa.model.DTO.ProductDTO;
+import utp.BroszuraProduktowa.model.DTO.UserDTO;
+import utp.BroszuraProduktowa.service.ProductService;
+import utp.BroszuraProduktowa.service.UserService;
 
 @Component
 public class Startup implements CommandLineRunner {
 
     @Autowired
-    private UserRepository userRepository;
+    UserService userService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
+    ProductService productService;
+    
     @Override
     public void run(String... args) throws Exception {
 
-        Optional<UserDAO> adminInDB = userRepository.findByUserName("admin");
+        UserDTO admin = new UserDTO();
+        admin.setUsername("admin");
+        admin.setPassword("admin");
+        userService.register(admin, "ROLE_ADMIN");
 
-        if (!adminInDB.isPresent()) {
-            UserDAO superAdmin = new UserDAO();
-            superAdmin.setUserName("admin");
-            superAdmin.setPassword(passwordEncoder.encode("admin"));
-            superAdmin.setRoles("ROLE_ADMIN");
-            superAdmin.setActive(true);
-    
-            userRepository.save(superAdmin);    
-        }
+        UserDTO user1 = new UserDTO();
+        user1.setUsername("user1");
+        user1.setEmail("user1@user1.com");
+        user1.setPassword("user1");
+        userService.register(user1, "ROLE_USER");
+        
+        ProductDTO productDto = new ProductDTO();
+        productDto.setName("product");
+        productDto.setDescription("description");
+        productDto.setTags("tag1,tag2");
+        productService.addProduct(productDto);
+
+        // CommentRatingDTO commentRatingDto = new CommentRatingDTO();
+        // commentRatingDto.setComment("comment1");
+        // commentRatingDto.setRating(5);
+        // productService.addCommentRating(commentRatingDto, productDao, principal);
     }
     
 }
