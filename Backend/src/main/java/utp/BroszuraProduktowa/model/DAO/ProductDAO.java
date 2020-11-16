@@ -1,7 +1,9 @@
 package utp.BroszuraProduktowa.model.DAO;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -36,8 +38,8 @@ public class ProductDAO {
     }
 
     @JsonBackReference
-    @ManyToMany(mappedBy = "products", cascade = CascadeType.REMOVE)
-    private List<UserDAO> users = new ArrayList<>();
+    @ManyToMany(mappedBy = "products")
+    private Set<UserDAO> users = new HashSet<>();
     public void add(UserDAO userDao) {
         users.add(userDao);
     }

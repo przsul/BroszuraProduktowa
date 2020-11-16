@@ -38,7 +38,13 @@ public class ProductService {
     }
 
 	public void deleteProduct(int id) {
-        productRepository.deleteById(id);
+        Optional<ProductDAO> productDao = productRepository.findById(id);
+        if (productDao.isPresent()) {
+            List<UserDAO> users = userRepository.findAll();
+            for (UserDAO user : users)
+                user.removeProduct(productDao.get());
+            productRepository.deleteById(id);    
+        }
 	}
 
 	public void addCommentRating(CommentRatingDTO commentRatingDto, int productId, Principal principal) {
@@ -59,16 +65,18 @@ public class ProductService {
 	}
 
 	public void addToFavorite(int productId, Principal principal) {
-        Optional<UserDAO> userDao = userRepository.findByUserName(principal.getName());
+        Optional<ProductDAO> productDao = productRepository.findById(productId);
 
-        if (userDao.isPresent()) {
-            Optional<ProductDAO> productDao = productRepository.findById(productId);
-            if (productDao.isPresent()) {
-                userDao.get().add(productDao.get());
+        if (productDao.isPresent()) {
+            Optional<UserDAO> userDao = userRepository.findByUserName(principal.getName());
+
+            if (userDao.isPresent()) {
+                userDao.get().addProduct(productDao.get());
                 userRepository.save(userDao.get());
                 productRepository.save(productDao.get());
             }
         }
+
 	}
 
 	public List<ProductDAO> getProducts() {

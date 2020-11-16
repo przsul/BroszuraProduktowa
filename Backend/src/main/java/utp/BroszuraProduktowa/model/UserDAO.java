@@ -1,7 +1,7 @@
 package utp.BroszuraProduktowa.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,8 +28,8 @@ public class UserDAO {
 
     @ManyToMany
     @JoinTable(name = "favorite")
-    private List<ProductDAO> products = new ArrayList<>();
-    public void add(ProductDAO productDao) {
+    private Set<ProductDAO> products = new HashSet<>();
+    public void addProduct(ProductDAO productDao) {
         products.add(productDao);
         productDao.add(this);
     }
@@ -38,4 +38,9 @@ public class UserDAO {
         products.remove(productDao);
         productDao.delete(this);
     }
+
+	public void removeProduct(ProductDAO productDao) {
+        this.products.remove(productDao);
+        productDao.getUsers().remove(this);
+	}
 }
