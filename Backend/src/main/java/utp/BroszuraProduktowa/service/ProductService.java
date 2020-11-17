@@ -111,8 +111,10 @@ public class ProductService {
             Optional<UserDAO> userDao = userRepository.findByUsername(auth.getName());
             
             if (userDao.isPresent()) {
-                userDao.get().deleteCommentsRatings(commentRatingDao.get());
-                commentRepository.delete(commentRatingDao.get());
+                if (userDao.get().getId() == commentRatingDao.get().getUser().getId()) {
+                    userDao.get().deleteCommentsRatings(commentRatingDao.get());
+                    commentRepository.delete(commentRatingDao.get());
+                }
             }
         }
 	}
