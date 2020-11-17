@@ -1,9 +1,9 @@
 package utp.BroszuraProduktowa.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,17 +48,17 @@ public class ProductController {
     }
 
     @PostMapping("addCommentRating/{productId}")
-    public void addCommentRating(@RequestBody CommentRatingDTO commentRatingDto, @PathVariable int productId, Principal principal) {
-        productService.addCommentRating(commentRatingDto, productId, principal);
+    public void addCommentRating(@RequestBody CommentRatingDTO commentRatingDto, @PathVariable int productId, Authentication auth) {
+        productService.addCommentRating(commentRatingDto, productId, auth);
     }
 
     @PostMapping("addToFavorite/{productId}")
-    public void addToFavorite(@PathVariable int productId, Principal principal) {
-        productService.addToFavorite(productId, principal);
+    public void addToFavorite(@PathVariable int productId, Authentication auth) {
+        productService.addToFavorite(productId, auth);
     }
 
     @DeleteMapping("deleteFromFavorite/{productId}")
-    public void deleteFromFavorite(@PathVariable int productId, Principal principal) {
-        productService.deleteFromFavorite(productId, principal);
+    public void deleteFromFavorite(@PathVariable int productId, Authentication auth) {
+        productService.deleteFromFavorite(productId, auth);
     }
 }

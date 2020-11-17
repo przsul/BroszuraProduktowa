@@ -1,8 +1,11 @@
 package utp.BroszuraProduktowa.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,10 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import utp.BroszuraProduktowa.model.DAO.CommentRatingDAO;
 import utp.BroszuraProduktowa.model.DAO.ProductDAO;
 
 @Entity(name = "user")
@@ -39,6 +44,10 @@ public class UserDAO {
 
     @Getter @Setter
     private String roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @Getter @Setter
+    private List<CommentRatingDAO> commentsRatings = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(

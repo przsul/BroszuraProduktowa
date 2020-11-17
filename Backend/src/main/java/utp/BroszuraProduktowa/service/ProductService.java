@@ -1,10 +1,10 @@
 package utp.BroszuraProduktowa.service;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import utp.BroszuraProduktowa.model.UserDAO;
@@ -47,28 +47,31 @@ public class ProductService {
         }
 	}
 
-	public void addCommentRating(CommentRatingDTO commentRatingDto, int productId, Principal principal) {
+	public void addCommentRating(CommentRatingDTO commentRatingDto, int productId, Authentication auth) {
         Optional<ProductDAO> productDao = productRepository.findById(productId);
         
-
         if (productDao.isPresent()) {
-            CommentRatingDAO commentRatingDao = new CommentRatingDAO();
-            commentRatingDao.setComment(commentRatingDto.getComment());
-            commentRatingDao.setRating(commentRatingDto.getRating());
-            commentRatingDao.setUsername(principal.getName());
+            Optional<UserDAO> userDao = userRepository.findByUsername(auth.getName());
 
-            productDao.get().addCommentRating(commentRatingDao);
-
-            commentRepository.save(commentRatingDao);
-            productRepository.save(productDao.get());    
+            if (userDao.isPresent()) {
+                CommentRatingDAO commentRatingDao = new CommentRatingDAO();
+                commentRatingDao.setComment(commentRatingDto.getComment());
+                commentRatingDao.setRating(commentRatingDto.getRating());
+                commentRatingDao.addUser(userDao.get());
+    
+                productDao.get().addCommentRating(commentRatingDao);
+    
+                commentRepository.save(commentRatingDao);
+                productRepository.save(productDao.get());        
+            }
         }
 	}
 
-	public void addToFavorite(int productId, Principal principal) {
+	public void addToFavorite(int productId, Authentication auth) {
         Optional<ProductDAO> productDao = productRepository.findById(productId);
 
         if (productDao.isPresent()) {
-            Optional<UserDAO> userDao = userRepository.findByUsername(principal.getName());
+            Optional<UserDAO> userDao = userRepository.findByUsername(auth.getName());
 
             if (userDao.isPresent()) {
                 userDao.get().addProduct(productDao.get());
@@ -87,11 +90,11 @@ public class ProductService {
 		return productRepository.findById(productId).get().getComments();
 	}
 
-	public void deleteFromFavorite(int productId, Principal principal) {
+	public void deleteFromFavorite(int productId, Authentication auth) {
         Optional<ProductDAO> productDao = productRepository.findById(productId);
 
         if (productDao.isPresent()) {
-            Optional<UserDAO> userDao = userRepository.findByUsername(principal.getName());
+            Optional<UserDAO> userDao = userRepository.findByUsername(auth.getName());
 
             if (userDao.isPresent()) {
                 userDao.get().delete(productDao.get());

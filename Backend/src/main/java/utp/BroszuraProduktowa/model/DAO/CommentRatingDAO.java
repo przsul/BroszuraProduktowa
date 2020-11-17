@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import utp.BroszuraProduktowa.model.UserDAO;
 
 @Entity(name = "comment_rating")
 @NoArgsConstructor
@@ -27,8 +28,15 @@ public class CommentRatingDAO {
     @Getter @Setter
     private int rating;
 
+    @JsonBackReference
+    @ManyToOne
     @Getter @Setter
-    private String username;
+    private UserDAO user;
+
+    public void addUser(UserDAO user) {
+        this.user = user;
+        user.getCommentsRatings().add(this);
+    }
 
     @JsonBackReference
     @ManyToOne
