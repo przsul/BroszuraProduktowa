@@ -103,4 +103,17 @@ public class ProductService {
             }
         }
 	}
+
+	public void deleteCommentRating(int id, Authentication auth) {
+        Optional<CommentRatingDAO> commentRatingDao = commentRepository.findById(id);
+
+        if (commentRatingDao.isPresent()) {
+            Optional<UserDAO> userDao = userRepository.findByUsername(auth.getName());
+            
+            if (userDao.isPresent()) {
+                userDao.get().deleteCommentsRatings(commentRatingDao.get());
+                commentRepository.delete(commentRatingDao.get());
+            }
+        }
+	}
 }

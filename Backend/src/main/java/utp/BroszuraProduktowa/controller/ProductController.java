@@ -61,4 +61,9 @@ public class ProductController {
     public void deleteFromFavorite(@PathVariable int productId, Authentication auth) {
         productService.deleteFromFavorite(productId, auth);
     }
+
+    @DeleteMapping("deleteCommentRating/{id}")
+    public void deleteCommentRating(@PathVariable int id, Authentication auth) {
+        productService.deleteCommentRating(id, auth);
+    }
 }

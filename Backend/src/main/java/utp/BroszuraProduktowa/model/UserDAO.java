@@ -49,6 +49,11 @@ public class UserDAO {
     @Getter @Setter
     private List<CommentRatingDAO> commentsRatings = new ArrayList<>();
 
+    public void deleteCommentsRatings(CommentRatingDAO commentRatingDao) {
+        this.commentsRatings.remove(commentRatingDao);
+        commentRatingDao.setUser(this);
+    }
+
     @ManyToMany
     @JoinTable(
         name = "favorite",
