@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ProductsPageComponent } from './products-page/products-page.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     AppComponent,
     RegisterPageComponent,
     LoginPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    ProductsPageComponent
   ],
   imports: [
     BrowserModule,

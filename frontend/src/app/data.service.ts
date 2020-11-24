@@ -1,10 +1,11 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { JWT } from './model/model/JWT';
 import { LoginPageForm } from './model/model/LoginPageForm';
+import { Product } from './model/model/Product';
 import { RegisterPageForm } from './model/model/RegisterPageForm';
 
 @Injectable({
@@ -30,6 +31,15 @@ export class DataService {
 
   validateToken(token: String): Observable<any> {
     return this.http.post<any>(environment.baseURL + "/validateToken", token)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getProducts(): Observable<Array<Product>> {
+    return this.http.get<Array<Product>>(environment.baseURL + "/getProducts", {
+      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("jwt"))
+    })
     .pipe(
       catchError(this.handleError)
     );
