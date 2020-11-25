@@ -29,4 +29,8 @@ export class ProductsPageComponent implements OnInit {
     });
   }
 
+  onProductClick() {
+    console.log("klik");
+  }
+
 }

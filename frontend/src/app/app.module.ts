@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ProductsPageComponent } from './products-page/products-page.component';
     RegisterPageComponent,
     LoginPageComponent,
     HomePageComponent,
-    ProductsPageComponent
+    ProductsPageComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

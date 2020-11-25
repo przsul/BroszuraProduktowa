@@ -6,10 +6,22 @@
         border: 3px dotted blue;
     }
 </style>
-<div class="container">
+<div class="container mt-2">
     <div class="row">
-        <div class="blue col">
-            <div class="mt-2 shadow rounded product bg-white" *ngFor="let product of products">
+        <div class="col">
+            <!-- <form action="#"> -->
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="submit">Go</button>
+                    </div>
+                </div>    
+            <!-- </form> -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="mt-2 shadow-sm rounded product bg-light" *ngFor="let product of products" id="{{ product.id }}" (click)="onProductClick()">
                 <h5 class="ml-2 pt-2 " style="word-wrap: break-word;">{{ product.name }}</h5>
                 <div class="ml-2" style="word-wrap: break-word;">{{ product.description }}</div>
                 <ul class="ml-2 pb-2 list-inline">
