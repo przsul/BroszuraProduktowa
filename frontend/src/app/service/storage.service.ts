@@ -13,6 +13,13 @@ export class StorageService {
   }
 
   getRoles(): string {
-    return this.jwtHelper.decodeToken(localStorage.getItem('jwt'))['authorities'][0]['authority'];
+    let role: string;
+    try {
+      role = this.jwtHelper.decodeToken(localStorage.getItem('jwt'))['authorities'][0]['authority'];
+    } catch(e) {
+      role = ""
+    }
+    
+    return role;
   }
 }

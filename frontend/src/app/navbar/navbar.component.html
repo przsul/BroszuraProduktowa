@@ -2,9 +2,15 @@
     <ul class="nav">
     <a class="navbar-brand" href="#">Broszura Produktowa</a>
       <li class="nav-item">
-        <a routerLink="/home" class="nav-link d-flex align-items-center" routerLinkActive #rla1="routerLinkActive">
+        <a routerLink="/products" class="nav-link d-flex align-items-center" routerLinkActive #rla1="routerLinkActive">
           <!-- <img class="mr-sm-2" [src]="rla1.isActive ? 'assets/img/bootstrap-icons-1.1.0/house-fill.svg' : 'assets/img/bootstrap-icons-1.1.0/house.svg'" width="24" height="24"> -->
           <span class="d-none d-sm-block text-light">Produkty</span>
+        </a>
+      </li>
+      <li *ngIf="isAdmin" class="nav-item">
+        <a routerLink="/addProduct" class="nav-link d-flex align-items-center" routerLinkActive #rla2="routerLinkActive">
+          <!-- <img class="mr-sm-2" [src]="rla2.isActive ? 'assets/img/bootstrap-icons-1.1.0/house-fill.svg' : 'assets/img/bootstrap-icons-1.1.0/house.svg'" width="24" height="24"> -->
+          <span class="d-none d-sm-block text-light">Dodaj produkt</span>
         </a>
       </li>
     </ul>

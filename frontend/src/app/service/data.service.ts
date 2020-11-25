@@ -47,6 +47,15 @@ export class DataService {
     );
   }
 
+  addProduct(product: Product): Observable<any> {
+    return this.http.post<any>(environment.baseURL + "/addProduct", product, {
+      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("jwt"))
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
