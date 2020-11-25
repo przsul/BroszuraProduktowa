@@ -33,15 +33,11 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // this.router.events.subscribe((event) => {
-    //   if(event instanceof NavigationEnd) {
-        const role: string = this.storageService.getRoles();
-        if (role === "ROLE_ADMIN")
-          this.isAdmin = true;
-        else
-          this.isAdmin = false;
-    //   }
-    // });
+    const role: string = this.storageService.getRoles();
+    if (role === "ROLE_ADMIN")
+      this.isAdmin = true;
+    else
+      this.isAdmin = false;
   }
 
   onProductClick() {
@@ -62,9 +58,23 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
       event.target.attributes.src.value = "assets/img/pencil-grey.svg";
   }
 
+  addToFavorite(event: any) {
+    var productId = event.path[3].id;
+    if (event.target.attributes.src.value === "assets/img/star-purple.svg")
+      event.target.attributes.src.value = "assets/img/star-grey.svg";
+    else {
+      this.dataService.addToFavorite(productId).subscribe((response: any) => {
+        console.log(response);
+      }, (error) => {
+        console.error(error);
+      });
+      event.target.attributes.src.value = "assets/img/star-purple.svg";
+    }
+  }
+
   deleteProduct(event: any) {
     var productId = event.path[3].id;
-    this.dataService.deleteProduct(productId).subscribe((response: any) => {
+    this.dataService.deleteProduct(productId).subscribe(() => {
       location.reload();
     }, (error) => {
       console.error(error);

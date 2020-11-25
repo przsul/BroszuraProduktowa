@@ -37,5 +37,10 @@
                 <img src="assets/img/pencil-fill.svg" width="16" height="16" (mouseover)="changePencilIcon($event)" (mouseout)="changePencilIcon($event)" class="mt-1 d-block red text-center" style="cursor: pointer;">
             </div>
         </div>
+        <div *ngIf="!isAdmin" class="blue col-2 col-sm-1 d-flex justify-content-center pl-0 pr-0 mt-2 pt-2 rounded-right shadow-sm bg-light">
+            <div class="blue">
+                <img src="assets/img/star-grey.svg" width="16" height="16" (click)="addToFavorite($event)" class="mt-1 d-block red text-center" style="cursor: pointer;">
+            </div>
+        </div>
     </div>
 </div>

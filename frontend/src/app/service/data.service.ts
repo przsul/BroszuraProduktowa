@@ -65,6 +65,15 @@ export class DataService {
     );
   }
 
+  addToFavorite(productId: number): Observable<any> {
+    return this.http.post<any>(environment.baseURL + "/addToFavorite/" + productId, null, {
+      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("jwt"))
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
