@@ -3,10 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { JWT } from './model/model/JWT';
-import { LoginPageForm } from './model/model/LoginPageForm';
-import { Product } from './model/model/Product';
-import { RegisterPageForm } from './model/model/RegisterPageForm';
+import { JWT } from '../model/JWT';
+import { LoginPageForm } from '../model/LoginPageForm';
+import { Product } from '../model/Product';
+import { RegisterPageForm } from '../model/RegisterPageForm';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -29,11 +31,11 @@ export class DataService {
     );
   }
 
-  validateToken(token: String): Observable<any> {
+  validateToken(token: String): Promise<boolean> {
     return this.http.post<any>(environment.baseURL + "/validateToken", token)
     .pipe(
       catchError(this.handleError)
-    );
+    ).toPromise();
   }
 
   getProducts(): Observable<Array<Product>> {

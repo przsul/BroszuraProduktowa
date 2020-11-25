@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from '../data.service';
-import { RegisterPageForm } from '../model/model/RegisterPageForm';
+import { DataService } from '../service/data.service';
+import { RegisterPageForm } from '../model/RegisterPageForm';
 
 @Component({
   selector: 'app-register-page',

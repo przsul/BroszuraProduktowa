@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  showNavbar: boolean;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if(event instanceof NavigationEnd) {
+        if (window.location.href.includes("login"))
+          this.showNavbar = false;
+        else if (window.location.href.includes("register"))
+          this.showNavbar = false;
+        else
+          this.showNavbar = true;
+      }
+    });
   }
 
 }

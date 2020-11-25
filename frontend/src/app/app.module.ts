@@ -10,6 +10,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginPageComponent,
     HomePageComponent,
     ProductsPageComponent,
-    NavbarComponent
+    NavbarComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

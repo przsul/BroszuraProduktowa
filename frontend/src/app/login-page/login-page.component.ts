@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from '../data.service';
-import { LoginPageForm } from '../model/model/LoginPageForm';
+import { DataService } from '../service/data.service';
+import { LoginPageForm } from '../model/LoginPageForm';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { StorageService } from '../storage.service';
+import { StorageService } from '../service/storage.service';
 
 @Component({
   selector: 'app-login-page',
@@ -36,7 +36,7 @@ export class LoginPageComponent implements OnInit {
       localStorage.setItem("jwt", response["jwt"]);
 
       if(localStorage.getItem("jwt"))
-        this.router.navigate(["home"]);
+        this.router.navigate(["products"]);
 
     }, (error) => {
       console.error(error);
