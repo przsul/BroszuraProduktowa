@@ -56,6 +56,15 @@ export class DataService {
     );
   }
 
+  deleteProduct(productId: number): Observable<any> {
+    return this.http.delete<any>(environment.baseURL + "/deleteProduct/" + productId, {
+      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("jwt"))
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
