@@ -2,6 +2,7 @@ package utp.BroszuraProduktowa.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -117,5 +118,12 @@ public class ProductService {
                 }
             }
         }
+	}
+
+	public Set<ProductDAO> getFavoriteProducts(Authentication auth) {
+        Optional<UserDAO> userDao = userRepository.findByUsername(auth.getName());
+        if (userDao.isPresent())
+            return userDao.get().getProducts();
+        return null;
 	}
 }

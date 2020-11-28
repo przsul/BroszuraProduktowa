@@ -1,13 +1,5 @@
-<style>
-    /* .red {
-        border: 3px dotted red;
-    }
-    .blue {
-        border: 3px dotted blue;
-    } */
-</style>
 <div class="container mt-2">
-    <div class="red row">
+    <div class="row">
         <div class="col p-0">
             <!-- <form action="#"> -->
                 <div class="input-group">
@@ -19,7 +11,7 @@
             <!-- </form> -->
         </div>
     </div>
-    <div class="red row" *ngFor="let product of products" id="{{ product.id }}">
+    <div class="row" *ngFor="let product of products" id="{{ product.id }}">
         <div class="col pr-0 mt-2 shadow-sm rounded-left product bg-light" (click)="onProductClick()">
             <h5 class="ml-2 pt-2 " style="word-wrap: break-word;">{{ product.name }}</h5>
             <div class="ml-2" style="word-wrap: break-word;">{{ product.description }}</div>
@@ -31,15 +23,15 @@
                 </a>
             </ul>
         </div>
-        <div *ngIf="isAdmin" class="blue col-2 col-sm-1 d-flex justify-content-center pl-0 pr-0 mt-2 pt-2 rounded-right shadow-sm bg-light">
-            <div class="blue">
-                <img src="assets/img/trash-grey.svg" width="16" height="16" (mouseover)="changeTrashIcon($event)" (mouseout)="changeTrashIcon($event)" (click)="deleteProduct($event)" class="mt-1 d-block red text-center" style="cursor: pointer;">
-                <img src="assets/img/pencil-fill.svg" width="16" height="16" (mouseover)="changePencilIcon($event)" (mouseout)="changePencilIcon($event)" class="mt-1 d-block red text-center" style="cursor: pointer;">
+        <div *ngIf="isAdmin" class="col-2 col-sm-1 d-flex justify-content-center pl-0 pr-0 mt-2 pt-2 rounded-right shadow-sm bg-light">
+            <div>
+                <img src="assets/img/trash-grey.svg" width="16" height="16" (mouseover)="onTrashIcon($event)" (mouseout)="onTrashIcon($event)" (click)="deleteProduct($event)" class="mt-1 d-block text-center" style="cursor: pointer;">
+                <img src="assets/img/pencil-fill.svg" width="16" height="16" (mouseover)="onPencilIcon($event)" (mouseout)="onPencilIcon($event)" class="mt-1 d-block text-center" style="cursor: pointer;">
             </div>
         </div>
-        <div *ngIf="!isAdmin" class="blue col-2 col-sm-1 d-flex justify-content-center pl-0 pr-0 mt-2 pt-2 rounded-right shadow-sm bg-light">
-            <div class="blue">
-                <img src="assets/img/star-grey.svg" width="16" height="16" (click)="addToFavorite($event)" class="mt-1 d-block red text-center" style="cursor: pointer;">
+        <div *ngIf="!isAdmin" class="col-2 col-sm-1 d-flex justify-content-center pl-0 pr-0 mt-2 pt-2 rounded-right shadow-sm bg-light">
+            <div>
+                <img src="assets/img/star-grey.svg" width="16" height="16" (click)="onFavorite($event)" class="mt-1 d-block text-center" style="cursor: pointer;">
             </div>
         </div>
     </div>

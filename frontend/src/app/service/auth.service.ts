@@ -17,16 +17,13 @@ export class AuthService {
       const token = localStorage.getItem('jwt');
 
       if (token == null) {
-        console.log("nie ma tokenu");
         resolve(false);
       }
         
   
       this.dataService.validateToken(token).then((response: any) => {
-        console.log("token poprawny");
         resolve(true);
       }, () => {
-        console.log("token nie poprawny")
         resolve(false);
       });
     });

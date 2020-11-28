@@ -12,6 +12,7 @@ import { ProductsPageComponent } from './products-page/products-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AddProductPageComponent } from './add-product-page/add-product-page.component';
+import { FavoritesPageComponent } from './favorites-page/favorites-page.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AddProductPageComponent } from './add-product-page/add-product-page.com
     ProductsPageComponent,
     NavbarComponent,
     LogoutComponent,
-    AddProductPageComponent
+    AddProductPageComponent,
+    FavoritesPageComponent
   ],
   imports: [
     BrowserModule,

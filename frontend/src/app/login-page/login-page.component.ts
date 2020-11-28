@@ -30,9 +30,6 @@ export class LoginPageComponent implements OnInit {
     var loginPageForm = new LoginPageForm(this.loginForm.value);
     
     this.dataService.authenticate(loginPageForm).subscribe((response: any) => {
-
-      console.log(JSON.stringify(response, null, 2));
-
       localStorage.setItem("jwt", response["jwt"]);
 
       if(localStorage.getItem("jwt"))

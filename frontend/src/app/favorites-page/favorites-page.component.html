@@ -1,0 +1,25 @@
+<div class="container mt-2">
+    <div *ngIf="isEmptySet" class="row">
+        <div class="red text-center col">
+            <h5>Nie masz ulubionych produktów</h5>
+        </div>
+    </div>
+    <div class="row" *ngFor="let product of products" id="{{ product.id }}">
+        <div class="col pr-0 mt-2 shadow-sm rounded-left product bg-light">
+            <h5 class="ml-2 pt-2 " style="word-wrap: break-word;">{{ product.name }}</h5>
+            <div class="ml-2" style="word-wrap: break-word;">{{ product.description }}</div>
+            <ul class="ml-2 mb-2 list-inline">
+                <a href="#">
+                    <li class="small list-inline-item" *ngFor="let tag of product.tags">
+                        {{ tag }}
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="col-2 col-sm-1 d-flex justify-content-center pl-0 pr-0 mt-2 pt-2 rounded-right shadow-sm bg-light">
+            <div>
+                <img src="assets/img/star-purple.svg" width="16" height="16" (click)="onFavorite($event)" class="mt-1 d-block text-center" style="cursor: pointer;">
+            </div>
+        </div>
+    </div>
+</div>

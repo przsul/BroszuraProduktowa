@@ -29,16 +29,8 @@ export class RegisterPageComponent implements OnInit {
     var registerPageForm = new RegisterPageForm(this.registerForm.value);
     
     this.dataService.register(registerPageForm).subscribe((response: any) => {
-
-      console.log(JSON.stringify(response, null, 2));
-
       this.infoMessage = "Registered successfully.";
       this.showInfo = true;
-
-      // this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
-      //   this.router.navigateByUrl('/user');
-      // }); 
-
     }, (error) => {
       console.error(error);
     });

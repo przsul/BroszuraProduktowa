@@ -7,3 +7,7 @@
 .navbar-toggler:focus {
     outline: 0px;
 }
+
+span {
+    color: #fff;
+}

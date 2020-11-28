@@ -1,6 +1,7 @@
 package utp.BroszuraProduktowa.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -40,6 +41,11 @@ public class ProductController {
     @GetMapping("getProducts")
     public List<ProductDAO> getProducts() {
         return productService.getProducts();
+    }
+
+    @GetMapping("getFavoriteProducts")
+    public Set<ProductDAO> getFavoriteProducts(Authentication auth) {
+        return productService.getFavoriteProducts(auth);
     }
 
     @GetMapping("getCommentsRatings/{productId}")

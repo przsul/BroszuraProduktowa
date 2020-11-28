@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/api/authenticate", "/api/registerUser", "/api/validateToken").permitAll()
 				.antMatchers("/api/addProduct", "/api/deleteProduct/**").hasRole("ADMIN")
-				.antMatchers("/api/addToFavorite/**", "/api/addCommentRating/**", "/api/getProducts", "/api/getCommentsRatings/**", "/api/deleteFromFavorite/**", "/api/deleteCommentRating/**").hasAnyRole("USER", "ADMIN")
+				.antMatchers("/api/getFavoriteProducts", "/api/addToFavorite/**", "/api/addCommentRating/**", "/api/getProducts", "/api/getCommentsRatings/**", "/api/deleteFromFavorite/**", "/api/deleteCommentRating/**").hasAnyRole("USER", "ADMIN")
 				.anyRequest().authenticated()
 				.and()
 				.exceptionHandling()
