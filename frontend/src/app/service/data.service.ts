@@ -15,6 +15,8 @@ import { RegisterPageForm } from '../model/RegisterPageForm';
 })
 export class DataService {
 
+  product: Product;
+
   constructor(private http: HttpClient) { }
 
   authenticate(loginPageForm: LoginPageForm): Observable<JWT> {
@@ -49,6 +51,15 @@ export class DataService {
 
   addProduct(product: Product): Observable<any> {
     return this.http.post<any>(environment.baseURL + "/addProduct", product, {
+      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("jwt"))
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  editProduct(product: Product): Observable<any> {
+    return this.http.put<any>(environment.baseURL + "/editProduct/" + product.id, product, {
       headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("jwt"))
     })
     .pipe(

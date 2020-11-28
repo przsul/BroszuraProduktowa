@@ -26,7 +26,7 @@
         <div *ngIf="isAdmin" class="col-2 col-sm-1 d-flex justify-content-center pl-0 pr-0 mt-2 pt-2 rounded-right shadow-sm bg-light">
             <div>
                 <img src="assets/img/trash-grey.svg" width="16" height="16" (mouseover)="onTrashIcon($event)" (mouseout)="onTrashIcon($event)" (click)="deleteProduct($event)" class="mt-1 d-block text-center" style="cursor: pointer;">
-                <img src="assets/img/pencil-fill.svg" width="16" height="16" (mouseover)="onPencilIcon($event)" (mouseout)="onPencilIcon($event)" class="mt-1 d-block text-center" style="cursor: pointer;">
+                <img src="assets/img/pencil-fill.svg" width="16" height="16" (mouseover)="onPencilIcon($event)" (mouseout)="onPencilIcon($event)" (click)="editProduct($event)" class="mt-1 d-block text-center" style="cursor: pointer;">
             </div>
         </div>
         <div *ngIf="!isAdmin" class="col-2 col-sm-1 d-flex justify-content-center pl-0 pr-0 mt-2 pt-2 rounded-right shadow-sm bg-light">

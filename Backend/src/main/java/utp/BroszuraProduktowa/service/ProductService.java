@@ -126,4 +126,15 @@ public class ProductService {
             return userDao.get().getProducts();
         return null;
 	}
+
+	public void editProduct(int productId, ProductDTO productDto) {
+        Optional<ProductDAO> productDao = productRepository.findById(productId);
+        if (productDao.isPresent()) {
+            productDao.get().setId(productId);
+            productDao.get().setName(productDto.getName());
+            productDao.get().setDescription(productDto.getDescription());
+            productDao.get().setTags(productDto.getTags());
+            productRepository.save(productDao.get());
+        }
+	}
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddProductPageComponent } from './add-product-page/add-product-page.component';
+import { EditProductPageComponent } from './edit-product-page/edit-product-page.component';
 import { FavoritesPageComponent } from './favorites-page/favorites-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'products', component: ProductsPageComponent, canActivate: [ValidateTokenGuardService] },
   { path: 'favorites', component: FavoritesPageComponent, canActivate: [ValidateTokenGuardService] },
   { path: 'addProduct', component: AddProductPageComponent, canActivate: [ValidateTokenGuardService] },
+  { path: 'editProduct/:productId', component: EditProductPageComponent, canActivate: [ValidateTokenGuardService] },
   { path: 'logout', component: LogoutComponent },
   { path: '**', redirectTo: 'login' }
 ];

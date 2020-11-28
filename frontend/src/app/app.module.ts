@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AddProductPageComponent } from './add-product-page/add-product-page.component';
 import { FavoritesPageComponent } from './favorites-page/favorites-page.component';
+import { EditProductPageComponent } from './edit-product-page/edit-product-page.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FavoritesPageComponent } from './favorites-page/favorites-page.componen
     NavbarComponent,
     LogoutComponent,
     AddProductPageComponent,
-    FavoritesPageComponent
+    FavoritesPageComponent,
+    EditProductPageComponent
   ],
   imports: [
     BrowserModule,
