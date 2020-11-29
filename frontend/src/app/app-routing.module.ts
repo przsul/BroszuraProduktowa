@@ -6,6 +6,7 @@ import { FavoritesPageComponent } from './favorites-page/favorites-page.componen
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LogoutComponent } from './logout/logout.component';
+import { ProductDetailsPageComponent } from './product-details-page/product-details-page.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { LoginGuardService } from './service/login-guard.service';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'favorites', component: FavoritesPageComponent, canActivate: [ValidateTokenGuardService] },
   { path: 'addProduct', component: AddProductPageComponent, canActivate: [ValidateTokenGuardService] },
   { path: 'editProduct/:productId', component: EditProductPageComponent, canActivate: [ValidateTokenGuardService] },
+  { path: 'productDetails/:productId', component: ProductDetailsPageComponent, canActivate: [ValidateTokenGuardService] },
   { path: 'logout', component: LogoutComponent },
   { path: '**', redirectTo: 'login' }
 ];

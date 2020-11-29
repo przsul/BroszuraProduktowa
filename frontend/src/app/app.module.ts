@@ -14,6 +14,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { AddProductPageComponent } from './add-product-page/add-product-page.component';
 import { FavoritesPageComponent } from './favorites-page/favorites-page.component';
 import { EditProductPageComponent } from './edit-product-page/edit-product-page.component';
+import { ProductDetailsPageComponent } from './product-details-page/product-details-page.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { EditProductPageComponent } from './edit-product-page/edit-product-page.
     LogoutComponent,
     AddProductPageComponent,
     FavoritesPageComponent,
-    EditProductPageComponent
+    EditProductPageComponent,
+    ProductDetailsPageComponent
   ],
   imports: [
     BrowserModule,

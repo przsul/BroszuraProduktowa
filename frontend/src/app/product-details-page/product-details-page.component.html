@@ -1,0 +1,49 @@
+<!-- <style>
+    .red {
+        border: 3px dotted red;
+    }
+
+    .blue {
+        border: 3px dotted blue;
+    }
+</style> -->
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <h4>Title</h4>
+        </div>
+    </div>
+
+    <div class="row shadow-sm mb-2">
+        <div class="col">
+            <div class="brochure d-flex justify-content-center p-2" [innerHTML]="brochureHTML"></div>
+        </div>
+    </div>
+
+    <div class="blue row shadow-sm mb-2 p-2">
+        <div class="col">
+            <h6>Tagi:</h6>
+            tags, tags, tags
+        </div>
+    </div>
+
+    <div class="blue row p-2 shadow-sm">
+        <div class="red col shadow-sm">
+            <h6>Komentarze:</h6>
+            <span><strong>Jan Kowal, </strong></span>
+            <span>ocena 4/5</span>
+            <div>
+                Produkt bardzo fajny ale nie idelanyProdukt bardzo fajny ale nie idelanyProdukt bardzo fajny ale nie idelany
+                Produkt bardzo fajny ale nie idelanyProdukt bardzo fajny ale nie idelanyProdukt bardzo fajny ale nie idelany
+                Produkt bardzo fajny ale nie idelanyProdukt bardzo fajny ale nie idelanyProdukt bardzo fajny ale nie idelany
+                Produkt bardzo fajny ale nie idelanyProdukt bardzo fajny ale nie idelanyProdukt bardzo fajny ale nie idelany
+                Produkt bardzo fajny ale nie idelanyProdukt bardzo fajny ale nie idelanyProdukt bardzo fajny ale nie idelany
+            </div>
+        </div>
+        <div class="red shadow-sm col-2 col-sm-1 d-flex justify-content-center pl-0 pr-0 mt-2 pt-2">
+            <div>
+                <img src="assets/img/trash-grey.svg" width="16" height="16" (mouseover)="onTrashIcon($event)" (mouseout)="onTrashIcon($event)" class="mt-1 d-block text-center" style="cursor: pointer;">
+            </div>
+        </div>
+    </div>
+</div>
