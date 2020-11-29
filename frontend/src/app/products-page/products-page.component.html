@@ -16,11 +16,9 @@
             <h5 class="ml-2 pt-2 " style="word-wrap: break-word;">{{ product.name }}</h5>
             <div class="ml-2" style="word-wrap: break-word;">{{ product.description }}</div>
             <ul class="ml-2 mb-2 list-inline">
-                <a href="#">
-                    <li class="small list-inline-item" *ngFor="let tag of product.tags">
-                        {{ tag }}
-                    </li>
-                </a>
+                <li class="small list-inline-item text-primary" style="cursor: pointer;" (click)="searchByTag($event)" *ngFor="let tag of product.tags">
+                    {{ tag }}
+                </li>
             </ul>
         </div>
         <div *ngIf="isAdmin" class="col-2 col-sm-1 d-flex justify-content-center pl-0 pr-0 mt-2 pt-2 rounded-right shadow-sm bg-light">

@@ -86,6 +86,12 @@ export class ProductsPageComponent implements OnInit {
     console.log("klik");
   }
 
+  searchByTag(event: any) {
+    event.stopPropagation();
+    this.searchField.setValue(event.target.innerText);
+    this.onSubmit();
+  }
+
   editProduct(event: any) {
     var productId: number = event.path[3].id;
     var productName = document.getElementById(productId.toString()).children[0].children[0].innerHTML;
