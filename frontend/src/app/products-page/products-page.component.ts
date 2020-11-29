@@ -3,6 +3,7 @@ import { DataService } from '../service/data.service';
 import { Product } from '../model/Product';
 import { NavigationEnd, Router } from '@angular/router';
 import { StorageService } from '../service/storage.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-products-page',
@@ -10,6 +11,12 @@ import { StorageService } from '../service/storage.service';
   styleUrls: ['./products-page.component.css']
 })
 export class ProductsPageComponent implements OnInit {
+
+  searchProductForm = new FormGroup({
+    searchField: new FormControl('')
+  });
+
+  get searchField() { return this.searchProductForm.get('searchField'); }
 
   products: Array<Product>;
   isAdmin: boolean;
@@ -25,6 +32,35 @@ export class ProductsPageComponent implements OnInit {
       this.isAdmin = false;
 
     this.dataService.getProducts().subscribe((response: Array<Product>) => {
+      this.products = response;
+      for(var product of this.products) {
+        var tags = product["tags"].split(",");
+        product.tags = tags;
+      }
+
+      if (!this.isAdmin) {
+        this.dataService.getFavoriteProducts().subscribe((response: Array<Product>) => {
+          for(var favProduct of response) {
+            let imgTag = document.getElementById(favProduct.id).children[1].children[0].children[0] as HTMLImageElement;
+            imgTag.src = "assets/img/star-purple.svg";
+          }
+        }, (error) => {
+          console.error(error);
+        });
+      }
+    }, (error) => {
+      console.error(error);
+    });
+  }
+
+  onInputKeyUp() {
+    this.onSubmit();
+  }
+
+  onSubmit() {
+    let query: string = this.searchField.value;
+
+    this.dataService.searchProduct(query).subscribe((response: Array<Product>) => {
       this.products = response;
       for(var product of this.products) {
         var tags = product["tags"].split(",");

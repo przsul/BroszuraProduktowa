@@ -103,6 +103,15 @@ export class DataService {
     );
   }
 
+  searchProduct(query: string): Observable<Array<Product>> {
+    return this.http.get<Array<Product>>(environment.baseURL + "/searchProduct?q=" + query, {
+      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("jwt"))
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

@@ -137,4 +137,8 @@ public class ProductService {
             productRepository.save(productDao.get());
         }
 	}
+
+	public List<ProductDAO> searchProduct(String q) {
+        return productRepository.findAllByNameContainingOrDescriptionContainingOrTagsContaining(q, q, q);
+	}
 }

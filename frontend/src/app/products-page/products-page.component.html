@@ -1,14 +1,14 @@
 <div class="container mt-2">
     <div class="row">
         <div class="col p-0">
-            <!-- <form action="#"> -->
+            <form [formGroup]="searchProductForm" (ngSubmit)="onSubmit()">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" (keyup)="onInputKeyUp()" placeholder="Search" formControlName="searchField">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" type="submit">Go</button>
                     </div>
                 </div>    
-            <!-- </form> -->
+            </form>
         </div>
     </div>
     <div class="row" *ngFor="let product of products" id="{{ product.id }}">
