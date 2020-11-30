@@ -84,13 +84,7 @@ export class ProductsPageComponent implements OnInit {
 
   onProductClick(event: any) {
     var productId: string = event.path[2].id;
-    this.dataService.product = {
-      id: productId,
-      description: null,
-      name: null,
-      tags: null
-    }
-    this.router.navigate(['productDetails/' + this.dataService.product.id]);
+    this.router.navigate(['productDetails/' + productId]);
   }
 
   searchByTag(event: any) {
