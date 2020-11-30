@@ -38,6 +38,10 @@ public class ProductDAO {
     private String description;
 
     @Getter @Setter
+    @Column(length = 1000)
+    private String brochure;
+
+    @Getter @Setter
     private String tags;
 
     @JsonBackReference

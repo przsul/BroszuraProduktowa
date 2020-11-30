@@ -34,6 +34,7 @@ public class ProductService {
         ProductDAO productDao = new ProductDAO();
         productDao.setName(productDto.getName());
         productDao.setDescription(productDto.getDescription());
+        productDao.setBrochure(productDto.getBrochure());
         productDao.setTags(productDto.getTags());
 
         return productRepository.save(productDao);
@@ -129,10 +130,10 @@ public class ProductService {
             Optional<UserDAO> userDao = userRepository.findByUsername(auth.getName());
             
             if (userDao.isPresent()) {
-                if (userDao.get().getId() == commentRatingDao.get().getUser().getId()) {
+                // if (userDao.get().getId() == commentRatingDao.get().getUser().getId()) {
                     userDao.get().deleteCommentsRatings(commentRatingDao.get());
                     commentRepository.delete(commentRatingDao.get());
-                }
+                // }
             }
         }
 	}
@@ -150,6 +151,7 @@ public class ProductService {
             productDao.get().setId(productId);
             productDao.get().setName(productDto.getName());
             productDao.get().setDescription(productDto.getDescription());
+            productDao.get().setBrochure(productDto.getBrochure());
             productDao.get().setTags(productDto.getTags());
             productRepository.save(productDao.get());
         }

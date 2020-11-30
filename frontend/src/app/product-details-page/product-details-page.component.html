@@ -41,7 +41,7 @@
         </div>
         <div class="red shadow-sm col-2 col-sm-1 d-flex justify-content-center pl-0 pr-0 mt-2 pt-2">
             <div>
-                <img *ngIf="commentRating.username == username" src="assets/img/trash-grey.svg" width="16" height="16" (mouseover)="onTrashIcon($event)" (mouseout)="onTrashIcon($event)" (click)="onTrashClick($event)" class="mt-1 d-block text-center" style="cursor: pointer;">
+                <img *ngIf="commentRating.username == username || role == 'ROLE_ADMIN'" src="assets/img/trash-grey.svg" width="16" height="16" (mouseover)="onTrashIcon($event)" (mouseout)="onTrashIcon($event)" (click)="onTrashClick($event)" class="mt-1 d-block text-center" style="cursor: pointer;">
             </div>
         </div>
     </div>

@@ -14,11 +14,13 @@ export class AddProductPageComponent implements OnInit {
   addProductForm = new FormGroup({
     productName: new FormControl('', Validators.required),
     productDescription: new FormControl('', Validators.required),
+    productBrochure: new FormControl(''),
     productTags: new FormControl('', Validators.required)
   });
   
   get productName() { return this.addProductForm.get('productName'); }
   get productDescription() { return this.addProductForm.get('productDescription'); }
+  get productBrochure() { return this.addProductForm.get('productBrochure'); }
   get productTags() { return this.addProductForm.get('productTags'); }
 
   constructor(private dataService: DataService, private router: Router) { }
@@ -31,6 +33,7 @@ export class AddProductPageComponent implements OnInit {
       id: null,
       name: this.productName.value,
       description: this.productDescription.value,
+      brochure: this.productBrochure.value,
       tags: this.productTags.value
     }
 

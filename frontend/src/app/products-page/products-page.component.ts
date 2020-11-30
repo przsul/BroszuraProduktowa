@@ -95,21 +95,6 @@ export class ProductsPageComponent implements OnInit {
 
   editProduct(event: any) {
     var productId: number = event.path[3].id;
-    var productName = document.getElementById(productId.toString()).children[0].children[0].innerHTML;
-    var productDescription = document.getElementById(productId.toString()).children[0].children[1].innerHTML;
-    var productTags = document.getElementById(productId.toString()).children[0].children[2].children[0].children;
-    var productTagsStrings = new Array<string>();
-    for (var i = 0; i < productTags.length; i++)
-      productTagsStrings.push(productTags[i].innerHTML.trim());
-    var productTagsFinal = productTagsStrings.join();
-
-    this.dataService.product = {
-      id: productId.toString(),
-      name: productName,
-      description: productDescription,
-      tags: productTagsFinal
-    }
-
     this.router.navigate(['editProduct/' + productId]);
   }
 
