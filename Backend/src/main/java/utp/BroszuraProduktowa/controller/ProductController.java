@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import utp.BroszuraProduktowa.model.DAO.CommentRatingDAO;
 import utp.BroszuraProduktowa.model.DAO.ProductDAO;
 import utp.BroszuraProduktowa.model.DTO.CommentRatingDTO;
 import utp.BroszuraProduktowa.model.DTO.ProductDTO;
@@ -50,13 +49,18 @@ public class ProductController {
         return productService.getProducts();
     }
 
+    @GetMapping("getProduct/{productId}")
+    public ProductDAO getProduct(@PathVariable int productId) {
+        return productService.getProduct(productId);
+    }
+
     @GetMapping("getFavoriteProducts")
     public Set<ProductDAO> getFavoriteProducts(Authentication auth) {
         return productService.getFavoriteProducts(auth);
     }
 
     @GetMapping("getCommentsRatings/{productId}")
-    public List<CommentRatingDAO> getCommentsRatings(@PathVariable int productId) {
+    public List<CommentRatingDTO> getCommentsRatings(@PathVariable int productId) {
         return productService.getCommentsRatings(productId);
     }
 

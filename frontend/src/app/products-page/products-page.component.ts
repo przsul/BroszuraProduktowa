@@ -82,8 +82,15 @@ export class ProductsPageComponent implements OnInit {
     });
   }
 
-  onProductClick() {
-    console.log("klik");
+  onProductClick(event: any) {
+    var productId: string = event.path[2].id;
+    this.dataService.product = {
+      id: productId,
+      description: null,
+      name: null,
+      tags: null
+    }
+    this.router.navigate(['productDetails/' + this.dataService.product.id]);
   }
 
   searchByTag(event: any) {

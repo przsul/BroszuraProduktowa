@@ -1,5 +1,6 @@
 package utp.BroszuraProduktowa.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -87,8 +88,24 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 
-	public List<CommentRatingDAO> getCommentsRatings(int productId) {
-		return productRepository.findById(productId).get().getComments();
+	public List<CommentRatingDTO> getCommentsRatings(int productId) {
+        List<CommentRatingDAO> commentRatingDaos = productRepository.findById(productId).get().getComments();
+        if (commentRatingDaos.size() > 0) {
+            List<CommentRatingDTO> commentRatingDtos = new ArrayList<>();
+
+            for (int i = 0; i < commentRatingDaos.size(); i++) {
+                CommentRatingDTO commentRatingDto = new CommentRatingDTO();
+                commentRatingDto.setId(commentRatingDaos.get(i).getId());
+                commentRatingDto.setComment(commentRatingDaos.get(i).getComment());
+                commentRatingDto.setRating(commentRatingDaos.get(i).getRating());
+                commentRatingDto.setProductId(commentRatingDaos.get(i).getProduct().getId());
+                commentRatingDto.setUsername(commentRatingDaos.get(i).getUser().getUsername());
+                commentRatingDtos.add(commentRatingDto);
+            }
+            
+            return commentRatingDtos;    
+        }
+        return null;
 	}
 
 	public void deleteFromFavorite(int productId, Authentication auth) {
@@ -140,5 +157,9 @@ public class ProductService {
 
 	public List<ProductDAO> searchProduct(String q) {
         return productRepository.findAllByNameContainingOrDescriptionContainingOrTagsContaining(q, q, q);
+	}
+
+	public ProductDAO getProduct(int productId) {
+		return productRepository.findById(productId).get();
 	}
 }

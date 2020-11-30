@@ -1,5 +1,11 @@
+import { CommentStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { NavigationEnd, Router } from '@angular/router';
+import { CommentRating } from '../model/CommentRating';
+import { Product } from '../model/Product';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-product-details-page',
@@ -9,8 +15,15 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class ProductDetailsPageComponent implements OnInit {
 
   brochureHTML: SafeHtml;
+  commentsRatings: Array<CommentRating>;
+  noComments: boolean;
+  product: Product;
 
-  constructor(private sanitizer: DomSanitizer) { }
+  addCommentRatingForm = new FormGroup({
+    
+  });
+  
+  constructor(private router: Router, private dataService: DataService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     var brochure = `
@@ -30,6 +43,23 @@ export class ProductDetailsPageComponent implements OnInit {
       </div>
     `;
     this.brochureHTML = this.sanitizer.bypassSecurityTrustHtml(brochure);
+
+    var productId: number = parseInt(this.dataService.product.id);
+
+    this.dataService.getProduct(productId).subscribe((response: Product) => {
+      this.product = response;
+      var tags = this.product["tags"].split(",");
+      this.product.tags = tags;
+    }, (error) => {
+      console.error(error);
+    });
+
+    this.dataService.getCommentsRatings(productId).subscribe((response: Array<CommentRating>) => {
+      this.commentsRatings = response;
+    }, (error) => {
+      this.noComments = true;
+      console.error(error);
+    });
   }
 
   onTrashIcon(event: any) {
@@ -39,4 +69,7 @@ export class ProductDetailsPageComponent implements OnInit {
       event.target.attributes.src.value = "assets/img/trash-grey.svg";
   }
 
+  onSubmit() {
+
+  }
 }

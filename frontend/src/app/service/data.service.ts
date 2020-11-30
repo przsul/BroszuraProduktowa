@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { CommentRating } from '../model/CommentRating';
 import { JWT } from '../model/JWT';
 import { LoginPageForm } from '../model/LoginPageForm';
 import { Product } from '../model/Product';
@@ -42,6 +43,15 @@ export class DataService {
 
   getProducts(): Observable<Array<Product>> {
     return this.http.get<Array<Product>>(environment.baseURL + "/getProducts", {
+      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("jwt"))
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getProduct(productId: number): Observable<Product> {
+    return this.http.get<Product>(environment.baseURL + "/getProduct/" + productId, {
       headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("jwt"))
     })
     .pipe(
@@ -105,6 +115,15 @@ export class DataService {
 
   searchProduct(query: string): Observable<Array<Product>> {
     return this.http.get<Array<Product>>(environment.baseURL + "/searchProduct?q=" + query, {
+      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("jwt"))
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getCommentsRatings(productId: number): Observable<Array<CommentRating>> {
+    return this.http.get<Array<CommentRating>>(environment.baseURL + "/getCommentsRatings/" + productId, {
       headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("jwt"))
     })
     .pipe(
