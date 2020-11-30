@@ -6,6 +6,7 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { CommentRating } from '../model/CommentRating';
 import { Product } from '../model/Product';
 import { DataService } from '../service/data.service';
+import { StorageService } from '../service/storage.service';
 
 @Component({
   selector: 'app-product-details-page',
@@ -19,6 +20,7 @@ export class ProductDetailsPageComponent implements OnInit {
   noComments: boolean;
   product: Product;
   productId: number;
+  username: string;
 
   addCommentRatingForm = new FormGroup({
     commentControl: new FormControl(''),
@@ -28,7 +30,7 @@ export class ProductDetailsPageComponent implements OnInit {
   get commentControl() { return this.addCommentRatingForm.get('commentControl'); }
   get ratingControl() { return this.addCommentRatingForm.get('ratingControl'); }
 
-  constructor(private router: Router, private dataService: DataService, private sanitizer: DomSanitizer) { 
+  constructor(private storageService: StorageService, private router: Router, private dataService: DataService, private sanitizer: DomSanitizer) { 
     this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd) {
         var splittedUrl = window.location.pathname.split('/');
@@ -56,6 +58,8 @@ export class ProductDetailsPageComponent implements OnInit {
     `;
     this.brochureHTML = this.sanitizer.bypassSecurityTrustHtml(brochure);
 
+    this.username = this.storageService.getUsername();
+
     this.dataService.getProduct(this.productId).subscribe((response: Product) => {
       this.product = response;
       var tags = this.product["tags"].split(",");
@@ -77,6 +81,15 @@ export class ProductDetailsPageComponent implements OnInit {
       event.target.attributes.src.value = "assets/img/trash-red.svg";
     else
       event.target.attributes.src.value = "assets/img/trash-grey.svg";
+  }
+
+  onTrashClick(event: any) {
+    var commentRatingId = event.path[3].id
+    this.dataService.deleteCommentRating(commentRatingId).subscribe((response: any) => {
+      location.reload();
+    }, (error) => {
+      console.error(error);
+    });
   }
 
   onSubmit() {
